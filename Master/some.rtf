@@ -1,0 +1,55 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf600
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red170\green13\blue145;\red0\green0\blue0;\red63\green110\blue116;
+\red38\green71\blue75;\red196\green26\blue22;\red0\green116\blue0;\red28\green0\blue207;\red92\green38\blue153;
+}
+{\*\expandedcolortbl;\csgray\c100000;\csgenericrgb\c66500\c5200\c56900;\csgenericrgb\c0\c0\c0;\csgenericrgb\c24700\c43100\c45600;
+\csgenericrgb\c14900\c27800\c29400;\csgenericrgb\c77000\c10200\c8600;\csgenericrgb\c0\c45600\c0;\csgenericrgb\c11000\c0\c81000;\csgenericrgb\c35900\c14900\c60100;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab543
+\pard\tx543\pardeftab543\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf2 \CocoaLigature0 let\cf3  app = \cf4 XCUIApplication\cf3 ()\
+        \cf5 XCTAssert\cf3 (app.\cf4 windows\cf5 [\cf6 "repobrowser"\cf5 ]\cf3 .\cf4 exists\cf3 )\
+        \cf2 let\cf3  repobrowserWindow = \cf4 XCUIApplication\cf3 ().\cf4 windows\cf5 [\cf6 "repobrowser"\cf5 ]\cf3 \
+        \
+        \cf5 XCTAssert\cf3 (repobrowserWindow.\cf4 staticTexts\cf5 [\cf6 "SourceTree"\cf5 ]\cf3 .\cf4 exists\cf3 )\
+        \
+        \
+        repobrowserWindow.\cf4 staticTexts\cf5 [\cf6 "SourceTree"\cf5 ]\cf3 .\cf5 click\cf3 ()\
+        \
+        \
+        repobrowserWindow.\cf4 menuButtons\cf5 [\cf6 "+ New\'85"\cf5 ]\cf3 .\cf5 click\cf3 ()\
+        repobrowserWindow.\cf4 menuItems\cf5 [\cf6 "Clone from URL"\cf5 ]\cf3 .\cf5 click\cf3 ()\
+        \
+        \cf2 let\cf3  sheetsQuery = repobrowserWindow.\cf4 sheets\cf3 \
+        \
+        \cf5 XCTAssert\cf3 (sheetsQuery.\cf4 staticTexts\cf5 [\cf6 "This is not a valid source path / URL"\cf5 ]\cf3 .\cf4 exists\cf3 )\
+        \
+        \cf5 XCTAssert\cf3 (sheetsQuery.\cf4 staticTexts\cf5 [\cf6 "Clone a repository"\cf5 ]\cf3 .\cf4 exists\cf3 )\
+        \
+        \cf7 //Enter Github Https link\
+\cf3         \cf2 let\cf3  defaultrepoiconCell = repobrowserWindow\cf7 /*@START_MENU_TOKEN@*/\cf3 .\cf4 outlines\cf7 /*[[".groups",".scrollViews.outlines",".outlines"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/\cf3 .\cf5 children\cf3 (matching: .\cf5 outlineRow\cf3 ).\cf5 element\cf3 (boundBy: \cf8 0\cf3 ).\cf4 cells\cf3 .\cf5 containing\cf3 (.\cf5 image\cf3 , identifier:\cf6 "defaultrepoicon"\cf3 ).\cf4 element\cf3 \
+        defaultrepoiconCell.\cf5 typeText\cf3 (\cf4 Constants\cf3 .\cf4 gitURLHttps\cf3  \cf2 as\cf3  \cf9 String\cf3 )\
+        \
+        \cf7 //Set path to local folder\
+\cf3         repobrowserWindow.\cf4 sheets\cf3 .\cf5 children\cf3 (matching: .\cf5 textField\cf3 ).\cf5 element\cf3 (boundBy: \cf8 1\cf3 ).\cf5 click\cf3 ()\
+        defaultrepoiconCell.\cf5 typeKey\cf3 (\cf4 XCUIKeyboardKeyDelete\cf3 , modifierFlags:.\cf4 command\cf3 )\
+        \cf2 let\cf3  path = repobrowserWindow.\cf4 outlines\cf3 .\cf5 children\cf3 (matching: .\cf5 outlineRow\cf3 ).\cf5 element\cf3 (boundBy: \cf8 0\cf3 ).\cf4 cells\cf3 .\cf5 containing\cf3 (.\cf5 image\cf3 , identifier:\cf6 "defaultrepoicon"\cf3 ).\cf4 element\cf3 \
+        path.\cf5 typeText\cf3 (\cf6 "/TestClone2"\cf3 )\
+        \
+\
+        \cf7 //sheetsQuery.staticTexts["This is not a valid source path / URL"].click()\
+\cf3        \
+        \cf2 let\cf3  repoType = sheetsQuery.\cf4 staticTexts\cf5 [\cf6 "This is a Git repository"\cf5 ]\cf3 \
+        \cf7 //XCTAssertFalse(repoType.exists)\
+\cf3         \
+        \cf2 let\cf3  exists = \cf9 NSPredicate\cf3 (format: \cf6 "exists == 1"\cf3 )\
+        \cf5 expectation\cf3 (for: exists, evaluatedWith: repoType, handler: \cf2 nil\cf3 )\
+        \cf5 waitForExpectations\cf3 (timeout: \cf8 5\cf3 , handler: \cf2 nil\cf3 )\
+        \
+        \cf5 XCTAssert\cf3 (repoType.\cf4 exists\cf3 )\
+       \
+        \cf7 //XCTAssert(sheetsQuery.staticTexts["This is a Git repository"].exists)\
+\cf3         sheetsQuery.\cf4 buttons\cf5 [\cf6 "Cancel"\cf5 ]\cf3 .\cf5 click\cf3 ()}
