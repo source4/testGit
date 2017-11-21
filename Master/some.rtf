@@ -12,12 +12,12 @@
 
 \f0\fs22 \cf2 \CocoaLigature0 let\cf3  app = \cf4 XCUIApplication\cf3 ()\
         \cf5 XCTAssert\cf3 (app.\cf4 windows\cf5 [\cf6 "repobrowser"\cf5 ]\cf3 .\cf4 exists\cf3 )\
-        \cf2 let\cf3  repobrowserWindow = \cf4 XCUIApplication\cf3 ().\cf4 windows\cf5 [\cf6 "repobrowser"\cf5 ]\cf3 \
+        \cf2 let\cf3  repobrowserWindow = \cf4 XCUIApplication\cf3 ().\cf4 windows\cf5 [\cf6 "Repobrowser"\cf5 ]\cf3 \
         \
         \cf5 XCTAssert\cf3 (repobrowserWindow.\cf4 staticTexts\cf5 [\cf6 "SourceTree"\cf5 ]\cf3 .\cf4 exists\cf3 )\
         \
         new code line\
-        repobrowserWindow.\cf4 staticTexts\cf5 [\cf6 "SourceTree"\cf5 ]\cf3 .\cf5 click\cf3 ()\
+        repobrowserWindow.\cf4 staticTexts\cf5 [\cf6 "Sourcetree"\cf5 ]\cf3 .\cf5 click\cf3 ()\
         \
         \
         repoWindow.\cf4 menuButtons\cf5 [\cf6 "+ New\'85"\cf5 ]\cf3 .\cf5 click\cf3 ()\
